@@ -1,0 +1,73 @@
+## Data business rules (spoken like a climbing-gym product owner)
+
+* A **gym** can contain several **walls** (bouldering area, lead wall, training board area), and each wall belongs to **one** gym.
+* A **wall** is identified inside a gym (name/zone) and has a **type** (boulder / lead / auto-belay / training board).
+* A **route** (or boulder problem) is **set on one wall** and is defined by setters, style and grade; it can be changed over time (re-set).
+* Each **route** has a **creation date** (when it is opened to climbers) and a **removal date** (when it is taken down); a route may still be active (no removal date yet).
+* A route can have a **color** (holds/tape) and a **tag/label** used by the gym (e.g., “Comp style”, “Slab”, “Kids”).
+* A route can be marked **available / unavailable** (e.g., maintenance, holds missing, wall closed), independently from removal.
+* A **climber** creates an account with personal contact info and chooses privacy options for their activity.
+* A climber can be a member of **zero or more groups** (friends team, club, university group).
+* A **group** has one **owner/manager** (a climber) who can invite or remove members.
+* A **subscription** links a climber to a gym (or chain) and defines the access level and validity period.
+* A climber can have **at most one active subscription at a time** for a given gym.
+* A **session** is created by one climber and represents a visit/training period, with a start date/time and (optionally) an end time.
+* A session can be associated to **one gym** (where the climber climbed) and optionally a specific wall area.
+* During a session, a climber records **attempts** on routes (tries), and can mark a route as **topped** (sent) within that session.
+* For a given route in a session, the climber can record **multiple attempts** and keep only one final outcome (topped or not topped).
+* The system keeps the **attempt count** and/or detailed attempt info (e.g., flash, number of tries), depending on how the climber logs it.
+* A climber may record an attempt even if the route was later removed; the historical record remains.
+* A climber can add **notes** about a route attempt (beta, conditions, injury note).
+* A session can include general metrics (perceived effort, duration) and optional training notes.
+* Grades can be stored as the gym’s grading system (Font/V-scale/YDS) and may vary by gym preferences.
+* Routes may have optional **setter names** and an internal route reference used by staff.
+* Groups can organize sessions as “group sessions” (optional) to compare results among members.
+* The system must prevent recording a session without a climber, and prevent recording a route without a wall and a gym.
+* Only the climber (and possibly group managers if the climber agrees) can edit or delete their session logs.
+
+---
+
+## Raw data dictionary (25–35 items)
+
+> **Note:** This is “raw” on purpose: only meaning + type + size, no modeling choices.
+
+| Data item (meaning)                                         | Type             | Size (chars/digits) |
+| ----------------------------------------------------------- | ---------------- | ------------------- |
+| Gym name                                                    | Text             | 80                  |
+| Gym street address (full line)                              | Text             | 120                 |
+| Gym city                                                    | Text             | 60                  |
+| Gym postal code                                             | Text             | 10                  |
+| Gym country                                                 | Text             | 40                  |
+| Gym contact email                                           | Text             | 120                 |
+| Gym contact phone                                           | Text             | 20                  |
+| Wall name / zone label (inside a gym)                       | Text             | 60                  |
+| Wall type (boulder/lead/auto-belay/training board)          | Text             | 20                  |
+| Wall height (meters)                                        | Number (decimal) | 4 (e.g., 12.5)      |
+| Route reference code (internal label)                       | Text             | 30                  |
+| Route name (public name if any)                             | Text             | 60                  |
+| Route discipline (boulder / route)                          | Text             | 10                  |
+| Route grade value (as displayed to climbers)                | Text             | 10                  |
+| Route grade system (Font / V / YDS etc.)                    | Text             | 10                  |
+| Route color / tape color                                    | Text             | 20                  |
+| Route style tag (slab/overhang/comp etc.)                   | Text             | 30                  |
+| Route setter name(s)                                        | Text             | 80                  |
+| Route creation date                                         | Date             | 8 (YYYYMMDD)        |
+| Route removal date (optional)                               | Date             | 8 (YYYYMMDD)        |
+| Route availability status (available/unavailable)           | Text             | 15                  |
+| Climber first name                                          | Text             | 50                  |
+| Climber last name                                           | Text             | 50                  |
+| Climber email (login/contact)                               | Text             | 120                 |
+| Climber phone (optional)                                    | Text             | 20                  |
+| Climber date of birth (optional)                            | Date             | 8 (YYYYMMDD)        |
+| Climber account creation date                               | Date             | 8 (YYYYMMDD)        |
+| Climber privacy level (private/friends/group/public)        | Text             | 15                  |
+| Subscription type (day pass/monthly/annual/student etc.)    | Text             | 20                  |
+| Subscription start date                                     | Date             | 8 (YYYYMMDD)        |
+| Subscription end date                                       | Date             | 8 (YYYYMMDD)        |
+| Group name                                                  | Text             | 60                  |
+| Group creation date                                         | Date             | 8 (YYYYMMDD)        |
+| Session start datetime                                      | DateTime         | 14 (YYYYMMDDhhmmss) |
+| Session end datetime (optional)                             | DateTime         | 14 (YYYYMMDDhhmmss) |
+| Attempt outcome for a route in a session (topped/attempted) | Text             | 10                  |
+| Attempt count (number of tries)                             | Number (integer) | 3                   |
+| Attempt note (free text)                                    | Text             | 500                 |

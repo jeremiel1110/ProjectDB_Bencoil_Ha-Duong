@@ -71,3 +71,5 @@
 | Attempt outcome for a route in a session (topped/attempted) | Text             | 10                  |
 | Attempt count (number of tries)                             | Number (integer) | 3                   |
 | Attempt note (free text)                                    | Text             | 500                 |
+
+Add what we modify/add/remove for our MCD

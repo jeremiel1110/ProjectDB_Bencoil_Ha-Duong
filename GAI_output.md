@@ -72,4 +72,38 @@
 | Attempt count (number of tries)                             | Number (integer) | 3                   |
 | Attempt note (free text)                                    | Text             | 500                 |
 
-Add what we modify/add/remove for our MCD
+
+
+---
+
+### Summary of Our Modifications to the Original GAI Model
+
+Based on the initial model provided by GAI, we implemented the following changes:
+
+**1. Removal of Group Entity**
+The *Group* entity has been removed from the model.
+
+**2. Route Entity Modifications**
+
+* Removed the following attributes: `ref_code`, `discipline`, `availability_status`, and `style`.
+* Replaced the `style` attribute with a new consolidated attribute: `style_tag` (combining style and tag).
+* Modified `setter_name` into a relationship with the **Climber** entity, since a setter is considered a climber within the system.
+* Created a dedicated **Style** entity associated with **Route**.
+
+**3. Session Entity Modifications**
+
+* Removed the attributes `perceived_effort` and `end_datetime`.
+* Renamed `start_datetime` to `date` for simplification.
+
+**4. Gym Entity Modification**
+
+* Added a `company` attribute to allow a subscription to provide access to multiple gyms under the same company.
+
+**5. Subscription Relationship Modification**
+
+* Updated the *Subscribe* relationship to include the following attributes:
+  `type`, `start_date`, `end_date`, `status`, and `subscription_id`.
+
+**6. Additional Style Entity**
+
+* Added a **Style** entity linked to **Route** through the *Define* relationship.

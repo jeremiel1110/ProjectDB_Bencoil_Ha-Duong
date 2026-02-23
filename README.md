@@ -51,7 +51,7 @@ The purpose was to extract structured and consistent requirements before startin
 
 ## Output from the Generative AI
 
-Output link:
+Output link and our modifications of it:
 [https://github.com/jeremiel1110/ProjectDB_Bencoil_Ha-Duong/blob/main/GAI_output](https://github.com/jeremiel1110/ProjectDB_Bencoil_Ha-Duong/blob/main/GAI_output)
 
 ### Result of the Prompt

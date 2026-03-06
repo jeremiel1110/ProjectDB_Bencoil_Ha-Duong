@@ -1,23 +1,22 @@
 CREATE TABLE Climber(
-   climber_id BIGSERIAL,
+   climber_id BIGINT AUTO_INCREMENT,
    first_name VARCHAR(80) NOT NULL,
    last_name VARCHAR(80) NOT NULL,
    email VARCHAR(255) NOT NULL,
    phone VARCHAR(30),
    birth_date DATE,
-   account_created_at DATETIME NOT NULL DEFAULT NOW(),
+   account_created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
    privacy_level SMALLINT NOT NULL DEFAULT 0,
    PRIMARY KEY(climber_id),
    UNIQUE(email)
 );
 
-CREATE TABLE Session(
-   session_id BIGSERIAL,
+CREATE TABLE `Session`(
+   session_id BIGINT AUTO_INCREMENT,
    date_ DATE NOT NULL,
    notes TEXT,
-   climber_id BIGSERIAL NOT NULL,
+   climber_id BIGINT NOT NULL,
    PRIMARY KEY(session_id),
-   UNIQUE(climber_id),
    FOREIGN KEY(climber_id) REFERENCES Climber(climber_id)
 );
 
@@ -35,7 +34,7 @@ CREATE TABLE Company(
 );
 
 CREATE TABLE Gym(
-   gym_id BIGSERIAL,
+   gym_id BIGINT AUTO_INCREMENT,
    name VARCHAR(150) NOT NULL,
    address VARCHAR(255),
    city VARCHAR(120),
@@ -49,17 +48,17 @@ CREATE TABLE Gym(
 );
 
 CREATE TABLE Wall(
-   wall_id BIGSERIAL,
+   wall_id BIGINT AUTO_INCREMENT,
    name VARCHAR(150) NOT NULL,
    type VARCHAR(80),
    height_meters DECIMAL(5,2),
-   gym_id BIGSERIAL NOT NULL,
+   gym_id BIGINT NOT NULL,
    PRIMARY KEY(wall_id),
    FOREIGN KEY(gym_id) REFERENCES Gym(gym_id)
 );
 
 CREATE TABLE Route(
-   route_id BIGSERIAL,
+   route_id BIGINT AUTO_INCREMENT,
    name VARCHAR(200),
    grade_value VARCHAR(20) NOT NULL,
    grade_system VARCHAR(30) NOT NULL,
@@ -67,29 +66,29 @@ CREATE TABLE Route(
    tag VARCHAR(50),
    setter_names VARCHAR(255) NOT NULL,
    created_on DATE NOT NULL,
-   removed_on DATE NOT NULL,
-   wall_id BIGSERIAL NOT NULL,
+   removed_on DATE,
+   wall_id BIGINT NOT NULL,
    PRIMARY KEY(route_id),
    FOREIGN KEY(wall_id) REFERENCES Wall(wall_id)
 );
 
 CREATE TABLE Session_route(
-   session_id BIGSERIAL,
-   route_id BIGSERIAL,
+   session_id BIGINT,
+   route_id BIGINT,
    outcome VARCHAR(30) NOT NULL,
    attempt_count INT NOT NULL DEFAULT 1,
    note TEXT,
    PRIMARY KEY(session_id, route_id),
-   FOREIGN KEY(session_id) REFERENCES Session(session_id),
+   FOREIGN KEY(session_id) REFERENCES `Session`(session_id),
    FOREIGN KEY(route_id) REFERENCES Route(route_id)
 );
 
 CREATE TABLE subscribe(
-   climber_id BIGSERIAL,
+   climber_id BIGINT,
    company_id VARCHAR(50),
    type VARCHAR(50),
-   start_date VARCHAR(50),
-   end_date VARCHAR(50),
+   start_date DATE,
+   end_date DATE,
    status VARCHAR(50),
    subscribtion_id VARCHAR(50),
    PRIMARY KEY(climber_id, company_id),
@@ -98,7 +97,7 @@ CREATE TABLE subscribe(
 );
 
 CREATE TABLE Define(
-   route_id BIGSERIAL,
+   route_id BIGINT,
    style_id VARCHAR(50),
    PRIMARY KEY(route_id, style_id),
    FOREIGN KEY(route_id) REFERENCES Route(route_id),

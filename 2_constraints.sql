@@ -12,8 +12,7 @@ ADD CONSTRAINT uq_wall_name_per_gym
 UNIQUE (gym_id, name);
 
 -- ROUTE
-ALTER TABLE Route
-ALTER COLUMN removed_on DROP NOT NULL;
+-- removed_on is already nullable, so no ALTER needed
 
 ALTER TABLE Route
 ADD CONSTRAINT chk_route_dates
@@ -25,11 +24,11 @@ CHECK (grade_system IN ('Font', 'V', 'YDS', 'French'));
 
 ALTER TABLE Route
 ADD CONSTRAINT chk_route_grade_value_not_blank
-CHECK (btrim(grade_value) <> '');
+CHECK (TRIM(grade_value) <> '');
 
 ALTER TABLE Route
 ADD CONSTRAINT chk_route_setter_names_not_blank
-CHECK (btrim(setter_names) <> '');
+CHECK (TRIM(setter_names) <> '');
 
 -- CLIMBER
 ALTER TABLE Climber
@@ -42,7 +41,7 @@ CHECK (birth_date IS NULL OR birth_date <= CURRENT_DATE);
 
 ALTER TABLE Climber
 ADD CONSTRAINT chk_climber_email_format
-CHECK (email ~ '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$');
+CHECK (email REGEXP '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$');
 
 -- SESSION_ROUTE
 ALTER TABLE Session_route
@@ -65,7 +64,3 @@ CHECK (status IN ('active', 'expired', 'cancelled', 'suspended'));
 ALTER TABLE subscribe
 ADD CONSTRAINT chk_subscribe_dates
 CHECK (end_date IS NULL OR end_date >= start_date);
-
-CREATE UNIQUE INDEX uq_active_subscription_per_climber_company
-ON subscribe (climber_id, company_id)
-WHERE status = 'active';

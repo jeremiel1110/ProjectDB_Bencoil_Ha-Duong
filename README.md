@@ -208,6 +208,16 @@ This script inserts data for:
 * route attempts
 * route-style associations
 
+### Execution Preview
+
+The following screenshot shows the successful execution of the SQL scripts used to create and populate the database.
+
+It confirms that the queries from the SQL files were executed correctly and that the tables were created without errors.
+
+Screenshot:
+
+![SQL Execution](sql_execution.png)
+
 ---
 
 # Step 5 – Querying the Database

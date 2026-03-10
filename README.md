@@ -224,21 +224,31 @@ Screenshot:
 
 Once the database was created and populated, we designed a **practical use scenario** for the database.
 
-## Usage Scenario – Efrei Sport Climbing
+# Usage scenario — Efrei Sport Climbing
 
-The database is used by the student association **Efrei Sport Climbing** at **Efrei Paris**.
+This database is used by the student association **Efrei Sport Climbing at Efrei Paris**.
 
-The association organizes climbing sessions for students and tracks their activity in different partner climbing gyms.
+The association organizes climbing practice for its members, helps students discover partner gyms, follows their participation in sessions, and analyzes which routes and styles are the most attractive or the most difficult for the group. The database is therefore useful both for the association board and for the training coordinators.
 
-The database helps the association:
+## Their objectives are:
 
-* identify the most active climbers
-* analyze which gyms and walls are most used
-* study the popularity of different climbing styles
-* detect routes that are frequently attempted but rarely topped
-* monitor student subscriptions to partner gym companies
-* prepare training sessions based on real member activity
+- to identify the most active student climbers
+- to see which gyms and walls are most used by members
+- to know which route styles are the most popular during association sessions
+- to detect routes that are attempted a lot but rarely topped
+- to monitor student subscriptions in partner gym companies
+- to prepare future outings and training sessions based on real member activity
 
+## Data that Efrei Sport Climbing needs to extract
+
+- the list of members and their activity level
+- the sessions logged by students
+- the partner gym companies most used by members
+- the walls and route types most climbed
+- the active and expired subscriptions
+- the routes that are popular, difficult, or never climbed
+- the styles most represented in attempted routes
+- the students who need follow-up, for example students with many attempts but few tops
 ---
 
 ## SQL Query File
